@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".src.ui.screens.Activities.TagList.Pages.TagListActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:translationZ="0.1dp"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:title="">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/arrow_left"
+                    app:tint="@color/white" />
+
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tag List"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBar"
+
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/iv_tag"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.3"
+                android:src="@drawable/tags"
+                app:tint="@color/lightGreen" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="1000"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_unit_count"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="5x"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="@color/lightGrey" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProductItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_l1"
+        android:layout_margin="20dp"
+        android:orientation="vertical" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/rvProductItems" />
+
+
+</RelativeLayout>

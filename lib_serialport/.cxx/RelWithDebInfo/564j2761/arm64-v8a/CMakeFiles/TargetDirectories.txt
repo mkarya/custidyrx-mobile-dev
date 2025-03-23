@@ -1,0 +1,3 @@
+C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a/CMakeFiles/SerialPortRD.dir
+C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a/CMakeFiles/rebuild_cache.dir

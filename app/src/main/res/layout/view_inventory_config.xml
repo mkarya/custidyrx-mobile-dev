@@ -1,0 +1,1246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="10dp"
+    android:background="#f9f9f9">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="350dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <CheckBox
+                android:id="@+id/cb_fast_tid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fast_tid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_fast_tid_tip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/prompt_fast_tid"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cb_fast_tid"
+                app:layout_constraintTop_toBottomOf="@id/cb_fast_tid" />
+
+            <CheckBox
+                android:id="@+id/cb_tag_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tag_focus"
+                app:layout_constraintStart_toStartOf="@id/cb_fast_tid"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_tid_tip" />
+
+            <TextView
+                android:id="@+id/tv_tag_focus_tip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_tag_focus"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@id/tv_fast_tid_tip"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_tid_tip"
+                app:layout_constraintTop_toBottomOf="@id/cb_tag_focus" />
+
+            <TextView
+                android:id="@+id/tv_antenna_count_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/antenna_count"
+                android:textColor="@color/gray_2"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/cb_fast_tid"
+                app:layout_constraintTop_toBottomOf="@id/tv_tag_focus_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_antenna_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                app:entries="@array/antenna_counts"
+                app:layout_constraintBottom_toBottomOf="@id/tv_antenna_count_tip"
+                app:layout_constraintStart_toEndOf="@id/tv_antenna_count_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_antenna_count_tip" />
+
+            <CheckBox
+                android:id="@+id/cb_fast_switch_ant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/fast_switch_ant_tip"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_antenna_count_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_antenna_count_tip" />
+
+            <View
+                android:id="@+id/v_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="5dp"
+                android:background="@color/plain"
+                app:layout_constraintTop_toBottomOf="@id/cb_fast_switch_ant" />
+
+            <!--            <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_config"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/v_line" />-->
+
+            <CheckBox
+                android:id="@+id/cb_ant_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:checked="true"
+                android:text="@string/ant_1"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_line" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.32"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_1" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_3"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.64"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_1" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/ant_4"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_1" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_5"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_ant_1" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_6"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_2"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_5" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_7"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_3"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_5" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_8"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_4"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_5" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_9"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_ant_5" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_10"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_2"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_9" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_11"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_3"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_9" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_12"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_4"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_9" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_13"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cb_ant_9" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_14"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_2"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_13" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_15"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_3"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_13" />
+
+            <CheckBox
+                android:id="@+id/cb_ant_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ant_16"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_ant_4"
+                app:layout_constraintTop_toTopOf="@id/cb_ant_13" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant1_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="A:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/cb_fast_tid"
+                app:layout_constraintTop_toBottomOf="@id/cb_ant_13" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:visibility="gone"
+                app:entries="@array/four_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant1_tip"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant1_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant1_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant1_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant1_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant1_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant2_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant1_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant1_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant1_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant2_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="B:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant1_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant1_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/four_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant2_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant2_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant2_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant2_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant2_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant3_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant2_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant2_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant2_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant3_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="C:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant2_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant2_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/four_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant3_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant3_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant3_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant3_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant3_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant4_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant3_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant3_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant3_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant4_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="D:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant3_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant3_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/four_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant4_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant4_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant4_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant4_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant4_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant4_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant4_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant4_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant5_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="E:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant4_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant4_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant5_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant5_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant5_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant5_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant5_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant6_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant5_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant5_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant5_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant6_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="F:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant5_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant5_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant6_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant6_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant6_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant6_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant6_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant7_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant6_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant6_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant6_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant7_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="G:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant6_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant6_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant7_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant7_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant7_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant7_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant7_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant8_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant7_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant7_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant7_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant8_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="H:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant7_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant7_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant8_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant8_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant8_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant8_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant8_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant8_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant8_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant8_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant9_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="I:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant8_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant8_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant9_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant9_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant9_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant9_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant9_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant10_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant9_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant9_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant9_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant10_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="J:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant9_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant9_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant10_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant10_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant10_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant10_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant10_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant11_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant10_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant10_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant10_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant11_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="K:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant10_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant10_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant11_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant11_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant11_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant11_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant11_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant12_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant11_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant11_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant11_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant12_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="L:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant11_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant11_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant12_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant12_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant12_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant12_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant12_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant13_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant12_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant12_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant12_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant13_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="M:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant12_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant12_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant13_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant13_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant13_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant13_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant13_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant14_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant13_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant13_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant13_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant14_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="N:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant13_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant13_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant14_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant14_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant14_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant14_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant14_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant15_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant14_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant14_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant14_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant15_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="O:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant14_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant14_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant15_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant15_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant15_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant15_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant15_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:nextFocusForward="@id/et_fast_ant16_time"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant15_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant15_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant15_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant16_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="P:"
+                android:textColor="@color/gray_2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant15_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant15_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_fast_ant16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:entries="@array/high_eight_channel"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant16_tip"
+                app:layout_constraintStart_toStartOf="@id/sp_fast_ant1"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant16_tip" />
+
+            <TextView
+                android:id="@+id/tv_fast_ant16_times_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cycles_prompt"
+                android:textColor="@color/gray_2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant16_tip" />
+
+            <EditText
+                android:id="@+id/et_fast_ant16_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="3"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_fast_ant16_times_tip"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_fast_ant16_times_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_fast_ant16_times_tip" />
+
+            <TextView
+                android:id="@+id/tv_session_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/session"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/tv_fast_ant16_tip"
+                app:layout_constraintTop_toBottomOf="@id/tv_fast_ant16_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_session"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:entries="@array/session_id_list"
+                app:layout_constraintBottom_toBottomOf="@id/tv_session_tip"
+                app:layout_constraintStart_toEndOf="@id/tv_session_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_session_tip" />
+
+            <TextView
+                android:id="@+id/tv_target_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/target"
+                android:textColor="@color/gray_2"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_session_tip"
+                app:layout_constraintStart_toEndOf="@+id/sp_session"
+                app:layout_constraintTop_toTopOf="@id/tv_session_tip" />
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/sp_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:entries="@array/inventoried_flag_list"
+                app:layout_constraintBottom_toBottomOf="@id/tv_target_tip"
+                app:layout_constraintStart_toEndOf="@id/tv_target_tip"
+                app:layout_constraintTop_toTopOf="@id/tv_target_tip" />
+
+            <TextView
+                android:id="@+id/tvRepeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/repeat"
+                android:textColor="@color/gray_2"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/etRepeat"
+                app:layout_constraintTop_toTopOf="@id/etRepeat" />
+
+            <EditText
+                android:id="@+id/etRepeat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:minWidth="30dp"
+                android:nextFocusDown="@id/etInterval"
+                android:singleLine="true"
+                android:text="1"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="@+id/sp_target"
+                app:layout_constraintEnd_toStartOf="@+id/etInterval"
+                app:layout_constraintStart_toEndOf="@+id/sp_target"
+                app:layout_constraintTop_toTopOf="@+id/sp_target" />
+
+            <TextView
+                android:id="@+id/tvInterval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/interval"
+                android:textColor="@color/gray_2"
+                android:textSize="10sp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/etInterval"
+                app:layout_constraintTop_toTopOf="@id/etInterval" />
+
+            <EditText
+                android:id="@+id/etInterval"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:inputType="number"
+                android:minWidth="60dp"
+                android:nextFocusDown="@id/etDelay"
+                android:singleLine="true"
+                android:text="0"
+                android:textSize="14dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/etRepeat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etRepeat"
+                app:layout_constraintTop_toTopOf="@+id/etRepeat" />
+
+            <CheckBox
+                android:id="@+id/cbFreezer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:enabled="false"
+                android:text="@string/freezer"
+                app:layout_constraintBottom_toBottomOf="@+id/etLoopCount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/etLoopCount" />
+
+            <CheckBox
+                android:id="@+id/cb_phase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/phase"
+                app:layout_constraintBottom_toBottomOf="@+id/cbFreezer"
+                app:layout_constraintStart_toEndOf="@+id/cbFreezer"
+                app:layout_constraintTop_toTopOf="@id/cbFreezer" />
+
+            <CheckBox
+                android:id="@+id/cbFastMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fast_mode"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/cbFreezer"
+                app:layout_constraintStart_toEndOf="@+id/cb_phase"
+                app:layout_constraintTop_toTopOf="@id/cbFreezer" />
+            <!--                android:minWidth="60dp"-->
+            <TextView
+                android:id="@+id/tvDelay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delay"
+                android:textColor="@color/gray_2"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="@+id/etDelay"
+                app:layout_constraintTop_toTopOf="@id/etDelay" />
+
+            <EditText
+                android:id="@+id/etDelay"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:inputType="number"
+                android:nextFocusDown="@id/etLoopCount"
+                android:singleLine="true"
+                android:text="0"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etLoopCount"
+                app:layout_constraintEnd_toStartOf="@+id/etLoopCount"
+                app:layout_constraintTop_toTopOf="@+id/etLoopCount" />
+
+            <TextView
+                android:id="@+id/tvLoopCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exe_times"
+                android:textColor="@color/gray_2"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="@+id/etLoopCount"
+                app:layout_constraintTop_toTopOf="@id/etLoopCount" />
+
+            <EditText
+                android:id="@+id/etLoopCount"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="numberSigned"
+                android:singleLine="true"
+                android:text="-1"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etInterval" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>

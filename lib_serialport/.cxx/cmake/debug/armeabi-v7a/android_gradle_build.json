@@ -1,0 +1,48 @@
+{
+  "stringTable": {
+    "0": "D:/DevPro/Android_Pro/java-rfid_sdk/lib_serialport/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi16 --gcc-toolchain=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DSerialPortRD_EXPORTS -I../../../../src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "D:\\Android\\Android_SDK\\ndk\\21.0.6113669\\build\\cmake\\android.toolchain.cmake",
+    "D:\\Android\\Android_SDK\\ndk\\21.0.6113669\\build\\cmake\\platforms.cmake",
+    "D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "D:\\Android\\Android_SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "D:\\Android\\Android_SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\.cxx\\cmake\\debug\\armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "SerialPortRD-Debug-armeabi-v7a": {
+      "buildCommand": "D:\\Android\\Android_SDK\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\.cxx\\cmake\\debug\\armeabi-v7a\" SerialPortRD",
+      "buildType": "debug",
+      "toolchain": "1981287490",
+      "abi": "armeabi-v7a",
+      "artifactName": "SerialPortRD",
+      "files": [
+        {
+          "src": "D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\src\\main\\cpp\\ModuleManager.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\src\\main\\cpp\\SerialPort.c",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libSerialPortRD.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "1981287490": {
+      "cCompilerExecutable": "D:\\Android\\Android_SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

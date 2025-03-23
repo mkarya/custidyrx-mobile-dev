@@ -1,0 +1,12 @@
+[
+{
+  "directory": "C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a",
+  "command": "C:\\Users\\CRx\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android21 --sysroot=C:/Users/CRx/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DSerialPortRD_EXPORTS -IC:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\SerialPortRD.dir\\src\\main\\cpp\\ModuleManager.c.o -c C:\\Users\\CRx\\Desktop\\android_rfid_sdk_source\\lib_serialport\\src\\main\\cpp\\ModuleManager.c",
+  "file": "C:\\Users\\CRx\\Desktop\\android_rfid_sdk_source\\lib_serialport\\src\\main\\cpp\\ModuleManager.c"
+},
+{
+  "directory": "C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a",
+  "command": "C:\\Users\\CRx\\AppData\\Local\\Android\\Sdk\\ndk\\25.1.8937393\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=aarch64-none-linux-android21 --sysroot=C:/Users/CRx/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DSerialPortRD_EXPORTS -IC:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/src/main/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O2 -g -DNDEBUG -fPIC -o CMakeFiles\\SerialPortRD.dir\\src\\main\\cpp\\SerialPort.c.o -c C:\\Users\\CRx\\Desktop\\android_rfid_sdk_source\\lib_serialport\\src\\main\\cpp\\SerialPort.c",
+  "file": "C:\\Users\\CRx\\Desktop\\android_rfid_sdk_source\\lib_serialport\\src\\main\\cpp\\SerialPort.c"
+}
+]

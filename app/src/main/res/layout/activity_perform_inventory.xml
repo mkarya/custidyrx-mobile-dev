@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screenBackground"
+    android:orientation="vertical"
+    tools:context=".src.ui.screens.Activities.PerformInventory.Pages.PerformInventoryActivity">
+
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@null"
+        android:translationZ="0.1dp"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:title="">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/arrow_left"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/perform_inventory"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="5dp"
+                    android:src="@drawable/gear"
+                    app:tint="@color/white" />
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        layout="@layout/view_inventory_tag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBar"/>
+
+    <LinearLayout
+        android:id="@+id/ll_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_below="@id/appBar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inventory Set"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@null"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:src="@drawable/down_arrow"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+
+
+
+    <com.custodyrx.library.label.ui.widget.VerticalDrawerLayout
+        android:id="@+id/vdl_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_below="@+id/ll_menu"
+        >
+
+        <include
+            layout="@layout/view_inventory_tag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+
+        <com.custodyrx.library.label.ui.widget.InventoryConfigView
+            android:id="@+id/config_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.custodyrx.library.label.ui.widget.VerticalDrawerLayout>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="Next"
+        android:layout_below="@+id/view_inventory_tag"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="35dp"
+        app:icon="@drawable/arrow_right"
+        app:iconGravity="textEnd"
+        app:iconSize="18dp"
+        app:iconTint="@color/white" />
+
+
+</RelativeLayout>

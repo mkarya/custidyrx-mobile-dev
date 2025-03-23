@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.2"
+                android:src="@drawable/boxes_stacked_blue" />
+
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_unit_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="1000"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_qty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="14x"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/refreshClear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:padding="10dp"
+                    android:text="REFRESH / CLEAR"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/darkPink"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconGravity="textStart"
+                    app:iconSize="20dp"
+                    app:iconTint="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/startStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:padding="10dp"
+                    android:text="Start"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/darkPink" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvInventory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_l1"
+        android:orientation="vertical" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMatchInventory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rvInventory"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="65dp"
+        android:orientation="vertical" />
+</RelativeLayout>

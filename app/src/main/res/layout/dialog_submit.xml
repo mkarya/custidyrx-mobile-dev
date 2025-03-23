@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15sp"
+    android:padding="20dp"
+    android:background="@drawable/rounded_background_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/paper_plane_top"
+            android:layout_marginRight="20dp"
+            app:tint="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Submit"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/gifImageView"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:gravity="left|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Sending data"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Please wait"
+                android:textColor="@color/lightGrey"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

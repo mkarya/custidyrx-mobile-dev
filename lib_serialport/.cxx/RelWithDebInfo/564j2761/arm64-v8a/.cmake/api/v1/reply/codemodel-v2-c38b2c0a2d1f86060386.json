@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-RelWithDebInfo-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "RelWithDebInfo",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Project",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "SerialPortRD::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SerialPortRD-RelWithDebInfo-7044c4a430f13ca56110.json",
+					"name" : "SerialPortRD",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport/.cxx/RelWithDebInfo/564j2761/arm64-v8a",
+		"source" : "C:/Users/CRx/Desktop/android_rfid_sdk_source/lib_serialport"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

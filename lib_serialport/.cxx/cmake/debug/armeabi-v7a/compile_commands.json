@@ -1,0 +1,13 @@
+[
+{
+  "directory": "D:/DevPro/Android_Pro/java-rfid_sdk/lib_serialport/.cxx/cmake/debug/armeabi-v7a",
+  "command": "D:\\Android\\Android_SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=armv7-none-linux-androideabi16 --gcc-toolchain=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DSerialPortRD_EXPORTS -I../../../../src/main/cpp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\SerialPortRD.dir\\src\\main\\cpp\\ModuleManager.c.o   -c D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\src\\main\\cpp\\ModuleManager.c",
+  "file": "D:/DevPro/Android_Pro/java-rfid_sdk/lib_serialport/src/main/cpp/ModuleManager.c"
+},
+
+{
+  "directory": "D:/DevPro/Android_Pro/java-rfid_sdk/lib_serialport/.cxx/cmake/debug/armeabi-v7a",
+  "command": "D:\\Android\\Android_SDK\\ndk\\21.0.6113669\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe --target=armv7-none-linux-androideabi16 --gcc-toolchain=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=D:/Android/Android_SDK/ndk/21.0.6113669/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DSerialPortRD_EXPORTS -I../../../../src/main/cpp  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles\\SerialPortRD.dir\\src\\main\\cpp\\SerialPort.c.o   -c D:\\DevPro\\Android_Pro\\java-rfid_sdk\\lib_serialport\\src\\main\\cpp\\SerialPort.c",
+  "file": "D:/DevPro/Android_Pro/java-rfid_sdk/lib_serialport/src/main/cpp/SerialPort.c"
+}
+]

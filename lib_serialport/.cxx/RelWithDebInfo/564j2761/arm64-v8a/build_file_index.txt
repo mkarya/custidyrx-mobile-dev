@@ -1,0 +1,1 @@
+C:\Users\CRx\Desktop\android_rfid_sdk_source\lib_serialport\CMakeLists.txt

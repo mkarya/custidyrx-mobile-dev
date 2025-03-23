@@ -1,0 +1,1 @@
+C:\Users\CRx\Desktop\android_rfid_sdk_source\lib_serialport\build\intermediates\cxx\RelWithDebInfo\564j2761\obj\arm64-v8a

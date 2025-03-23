@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".src.ui.screens.Activities.Login.Pages.LoginActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:src="@drawable/app_logo"/>
+
+        </LinearLayout>
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_l1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_background_white"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_to_your_account"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username"
+                app:boxBackgroundColor="@color/lightGrey"
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:hintTextColor="@color/colorPrimaryDark"
+                app:placeholderTextColor="@color/darkGrey">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="bob@CustodyRx.com"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                app:boxBackgroundColor="@color/lightGrey"
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:endIconMode="password_toggle"
+                app:hintTextColor="@color/colorPrimaryDark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="custodyrx"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forgot_password"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_login_24"
+                android:padding="10dp"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/black" />
+
+            <!-- <com.github.ybq.android.spinkit.SpinKitView
+                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                 android:id="@+id/spin_kit"
+                 style="@style/SpinKitView.FadingCircle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 app:SpinKit_Color="@color/colorAccent" />-->
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

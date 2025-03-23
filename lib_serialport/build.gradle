@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'com.naz.serial.port'
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles 'consumer-rules.pro'
+
+        //这里指定cpu架构
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //这里指定CMakeLists的位置，默认根目录是从当前模块目录开始的
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    sourceSets { main { jni.srcDirs = ['src/main/jni', 'src/main/cpp/'] } }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+}

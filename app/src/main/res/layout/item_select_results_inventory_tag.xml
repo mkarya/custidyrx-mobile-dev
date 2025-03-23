@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <View
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:background="@color/tagColor" />
+
+    <LinearLayout
+        android:id="@+id/l7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/product_layer_drawable"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:id="@+id/cb_tag_epc"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tag_epc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="DOS - Scooby Snax"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_unit_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-medium"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

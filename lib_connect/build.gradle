@@ -1,0 +1,27 @@
+apply plugin: 'com.android.library'
+
+android {
+    namespace 'android.hardware.usb.host'
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    compileOnly project(path: ':lib_reader')
+    compileOnly project(path: ':lib_serialport')
+}

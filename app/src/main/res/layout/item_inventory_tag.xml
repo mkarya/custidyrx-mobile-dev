@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_parent"
+    android:layout_width="match_parent"
+    android:layout_height="35dp"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/tv_tag_id"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_4"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/v_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_tag_epc"
+        android:layout_width="220dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_id"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_id"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_id" />
+
+    <TextView
+        android:id="@+id/tv_tag_times"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_epc"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <TextView
+        android:id="@+id/tv_tag_rssi"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_times"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <TextView
+        android:id="@+id/tvAnti"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_rssi"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <TextView
+        android:id="@+id/tv_tag_freq"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tvAnti"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <TextView
+        android:id="@+id/tv_tag_pc"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_freq"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <TextView
+        android:id="@+id/tv_tag_phase"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textColor="@color/gray_3"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag_epc"
+        app:layout_constraintStart_toEndOf="@id/tv_tag_pc"
+        app:layout_constraintTop_toTopOf="@id/tv_tag_epc" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_3"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

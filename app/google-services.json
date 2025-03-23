@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "868663968667",
+    "project_id": "custodyrx-567ae",
+    "storage_bucket": "custodyrx-567ae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868663968667:android:befaec4bd8c13f2170973e",
+        "android_client_info": {
+          "package_name": "com.custodyrx.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM4o1ESujwtcyvxNU8tOW7_4ZN7dNu6JQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

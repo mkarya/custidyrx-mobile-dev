@@ -1,0 +1,10 @@
+# ninja log v5
+0	13	0	clean	7a673891902dba63
+0	14	0	clean	7a673891902dba63
+17	257	730369854	CMakeFiles/SerialPortRD.dir/src/main/cpp/SerialPort.c.o	6adbebc1446c622f
+9	263	730369854	CMakeFiles/SerialPortRD.dir/src/main/cpp/ModuleManager.c.o	d60a557a983f015
+263	497	730369854	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libSerialPortRD.so	f3b70096299e5754
+0	12	0	clean	7a673891902dba63
+0	9	0	clean	7a673891902dba63
+0	10	0	clean	7a673891902dba63
+1	12	0	clean	7a673891902dba63

@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.payne.connect">
+
+    <uses-permission
+        android:name="android.hardware.usb.host"
+        android:required="false" />
+    <!--因为部分手机上是没有otg的所以需要加入特性-->
+    <uses-feature android:name="android.hardware.usb.host" />
+</manifest>

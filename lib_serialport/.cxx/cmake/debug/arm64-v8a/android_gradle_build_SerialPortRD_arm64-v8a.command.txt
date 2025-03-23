@@ -1,0 +1,7 @@
+Executable : D:\Android\Android_SDK\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+D:\DevPro\Android_Pro\java-rfid_sdk\lib_serialport\.cxx\cmake\debug\arm64-v8a
+SerialPortRD
+jvmArgs : 
+

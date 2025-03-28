@@ -14,10 +14,10 @@ activity = "1.10.0"
 constraintlayout = "2.2.0"
 retrofit = "2.1.0"
 firebaseCrashlytics = "18.3.7"
-googleServices = "4.3.10"
-googleGmsGoogleServices = "4.3.10"
-firebaseCrashlyticsGradle = "2.9.5"
-googleFirebaseCrashlytics = "2.9.5"
+googleServices = "4.4.2"
+googleGmsGoogleServices = "4.4.2"
+firebaseCrashlyticsGradle = "3.0.3"
+googleFirebaseCrashlytics = "3.0.3"
 
 
 [libraries]

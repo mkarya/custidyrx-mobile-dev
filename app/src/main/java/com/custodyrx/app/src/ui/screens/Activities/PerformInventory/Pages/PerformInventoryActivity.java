@@ -35,6 +35,7 @@ import com.custodyrx.app.src.ui.screens.Activities.SelectResultActivity;
 import com.custodyrx.app.src.ui.screens.Activities.TagList.Pages.TagListActivity;
 import com.custodyrx.library.label.GlobalCfg;
 import com.custodyrx.library.label.adapter.ReaderPowerAdapter;
+import com.custodyrx.library.label.base.ReaderBase;
 import com.custodyrx.library.label.bean.InventoryParam;
 import com.custodyrx.library.label.bean.InventoryTagBean;
 import com.custodyrx.library.label.bean.SetPowerBean;
@@ -44,6 +45,7 @@ import com.custodyrx.library.label.bean.type.LinkType;
 import com.custodyrx.library.label.model.BeeperHelper;
 import com.custodyrx.library.label.model.ReaderHelper;
 
+import com.custodyrx.library.label.model.ScannerSetting;
 import com.custodyrx.library.label.ui.AfterTextWatcher;
 import com.custodyrx.library.label.ui.home.inventory.ItemSpacingDecoration;
 import com.custodyrx.library.label.ui.home.inventory.PerformInventoryTagAdapter;
@@ -54,7 +56,9 @@ import com.custodyrx.library.label.util.PowerUtils;
 import com.custodyrx.library.label.util.XLog;
 import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
-import com.naz.serial.port.ModuleManager;
+import com.nativec.tools.ModuleManager;
+import com.nativec.tools.SerialPort;
+
 import com.orhanobut.hawk.Hawk;
 
 import com.payne.connect.port.SerialPortHandle;
@@ -82,8 +86,11 @@ import com.payne.reader.util.ThreadPool;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -105,6 +112,12 @@ public class PerformInventoryActivity extends BaseActivity {
     StorageHelper storageHelper;
 
     private Reader mReader;
+    private ReaderHelper mReaderHelper;
+    private ReaderBase mReaderBase;
+
+    private SerialPort mSerialPort = null;
+
+    private SerialPortHandle handle;
 
     private AntennaCount mAntennaCount;
 
@@ -419,7 +432,13 @@ public class PerformInventoryActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (mReaderBase != null)
+            mReaderBase.signOut();
 
+        if (mSerialPort != null)
+            mSerialPort.close();
+
+        mSerialPort = null;
     }
 
     @Override
@@ -462,7 +481,8 @@ public class PerformInventoryActivity extends BaseActivity {
 
 // Delay UI operations to prevent blocking onCreate()
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            toConnect();
+            //toRFIDConnect();
+            tobarcodeConnect();
         }, 500);
 
     }
@@ -779,7 +799,87 @@ public class PerformInventoryActivity extends BaseActivity {
 
     }
 
-    private void toConnect() {
+    private void tobarcodeConnect(){
+        showConnectionDialog();
+        try {
+            if (ModuleManager.newInstance().getUHFStatus()) {
+                ModuleManager.newInstance().setUHFStatus(false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(PerformInventoryActivity.this,"Please exit UHFDemo first!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+
+        try {
+            mSerialPort = new SerialPort(new File("/dev/ttyS1"), 9600, 0);
+
+            if (!ModuleManager.newInstance().setScanStatus(true)) {
+                throw new RuntimeException("Scan power on failure,may you open in other" +
+                        "Process and do not exit it");
+            }
+
+
+
+            try {
+                mReaderHelper = ReaderHelper.getDefaultHelper();
+                mReaderHelper.setReader(mSerialPort.getInputStream(), mSerialPort.getOutputStream());
+                mReaderBase = mReaderHelper.getReaderBase();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ;
+            }
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.currentThread().sleep(3000);
+                        ScannerSetting.newInstance().defaultSettings();
+                        Thread.currentThread().sleep(1000);
+                        hideConnectionDialog();
+                        showSnackBar("Barcode Scanner connected");
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+
+                }
+            }).start();
+
+
+        } catch (SecurityException e) {
+            Toast.makeText(
+                    PerformInventoryActivity.this,
+                    "This Port has no read and write permission.",
+                    Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(
+                    PerformInventoryActivity.this,
+                    "Open Fail,Unknown Error",
+                    Toast.LENGTH_SHORT).show();
+        } catch (InvalidParameterException e) {
+            Toast.makeText(
+                    PerformInventoryActivity.this,
+                    "Please configurate first.",
+                    Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            Log.e("where the exception!","is here"+e.getMessage());
+            /*catch exception test */
+        }
+
+
+    }
+
+    private void toRFIDConnect() {
         if (!PowerUtils.powerOn()) {
             showToast(R.string.power_on_failed);
             return;
@@ -792,7 +892,8 @@ public class PerformInventoryActivity extends BaseActivity {
             e.printStackTrace();
         }
         ModuleManager.newInstance().setUHFStatus(false);
-        SerialPortHandle handle = new SerialPortHandle("/dev/ttyS4", 115200);
+        handle = new SerialPortHandle("/dev/ttyS4", 115200);
+
         boolean success = mReader.connect(handle);
         String text = success ? "Connection SuccessFully" : "Connection Failed";
 
@@ -826,6 +927,7 @@ public class PerformInventoryActivity extends BaseActivity {
 
         hideConnectionDialog();
         showSnackBar("Scanner connected");
+
         setupReader();
 
 

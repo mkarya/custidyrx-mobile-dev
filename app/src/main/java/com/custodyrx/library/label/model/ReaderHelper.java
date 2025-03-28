@@ -1,7 +1,14 @@
 package com.custodyrx.library.label.model;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.custodyrx.library.label.base.QueryMessageTran;
+import com.custodyrx.library.label.base.ReaderBase;
 import com.custodyrx.library.label.bean.BarcodeData;
 import com.custodyrx.library.label.bean.BleAddress;
 import com.custodyrx.library.label.bean.DevicePower;
@@ -11,6 +18,7 @@ import com.custodyrx.library.label.bean.RechargeBean;
 import com.custodyrx.library.label.bean.SnNumber;
 import com.custodyrx.library.label.bean.TriggerKey;
 import com.custodyrx.library.label.util.XLog;
+import com.naz.serial.port.SerialPort;
 import com.payne.reader.Reader;
 import com.payne.reader.base.BaseInventory;
 import com.payne.reader.base.Consumer;
@@ -29,6 +37,8 @@ import com.payne.reader.process.ReaderImpl;
 import com.payne.reader.util.ArrayUtils;
 import com.payne.reader.util.CheckUtils;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.InvalidParameterException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +52,7 @@ import java.util.concurrent.TimeUnit;
  * Date 2020/8/3
  */
 public class ReaderHelper {
-    private static ReaderHelper mReadHelper = new ReaderHelper();
+    private static ReaderHelper mReadHelper;
     private final Reader mReader;
     private final Map<Byte, Consumer> mSuccessMap;
     private final Map<Byte, Consumer> mFailureMap;
@@ -152,15 +162,89 @@ public class ReaderHelper {
      */
     private int mRetrySetAntMaxCount = 5;
 
+    public final static String BROADCAST_ON_LOST_CONNECT = "com.reader.helper.onLostConnect";
+    public final static String BROADCAST_REFRESH_BAR_CODE = "com.reader.helper.refresh.barcode";
+    public final static String BROADCAST_CMD_SET_STATUS = "com.reader.helper.refresh.command.status";
+    public final static String BROADCAST_CMD_QUERY_VALUE = "com.reader.helper.refresh.query.value";
+
+    private static LocalBroadcastManager mLocalBroadcastManager = null;
+
+    private static ReaderBase readerBase;
+
+    private static Context mContext;
+
+    private static ScannerSetting mScannerSetting = ScannerSetting.newInstance();
+    private final TDCodeTagBuffer m_curOperateTagBinDCodeBuffer;
+
+    public static void setContext(Context context) throws Exception {
+        mContext = context;
+        mLocalBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+        mReadHelper = new ReaderHelper();
+    }
+
     private ReaderHelper() {
         this.mReader = ReaderImpl.create(AntennaCount.SINGLE_CHANNEL);
         this.mReader.setUndefinedResultCallback(this::processUnknownReceive);
         this.mSuccessMap = new ConcurrentHashMap<>();
         this.mFailureMap = new ConcurrentHashMap<>();
+        this.m_curOperateTagBinDCodeBuffer = new TDCodeTagBuffer();
     }
+
 
     public static ReaderHelper getDefaultHelper() {
         return mReadHelper;
+    }
+
+    public TDCodeTagBuffer getCurOperateTagBinDCodeBuffer() {
+        return m_curOperateTagBinDCodeBuffer;
+    }
+
+    public ScannerSetting getCurScannerSetting() {
+        return mScannerSetting;
+    }
+
+    public ReaderBase setReader(final InputStream in, OutputStream out) throws Exception {
+
+        if (in == null || out == null) throw new NullPointerException("in Or out is NULL!");
+
+        if (readerBase == null) {
+
+            readerBase = new ReaderBase(in, out) {
+
+                @Override
+                public void onLostConnect() {
+                    mLocalBroadcastManager.sendBroadcast(new Intent(BROADCAST_ON_LOST_CONNECT));
+                }
+
+                @Override
+                public void analyData(QueryMessageTran msgTran) {
+                }
+
+                @Override
+                public void receive2DCodeData(String string) {
+                    Toast.makeText(mContext, "Tag :" + string, Toast.LENGTH_SHORT).show();
+                    m_curOperateTagBinDCodeBuffer.getmRawData().add(string);
+                    mLocalBroadcastManager.sendBroadcast(new Intent(BROADCAST_REFRESH_BAR_CODE));
+                }
+
+                @Override
+                public void commandSetStatus(byte status) {
+                    Intent intent = new Intent(BROADCAST_CMD_SET_STATUS);
+                    intent.putExtra("status", status);
+                    mLocalBroadcastManager.sendBroadcast(intent);
+                }
+
+                @Override
+                public void commandQueryValue(byte[] value) {
+                    //mScannerSetting.mReturnParameterValue = new String(value);
+                    Intent intent = new Intent(BROADCAST_CMD_QUERY_VALUE);
+                    intent.putExtra("value", value);
+                    mLocalBroadcastManager.sendBroadcast(intent);
+                }
+            };
+        }
+
+        return readerBase;
     }
 
     /**
@@ -543,7 +627,7 @@ public class ReaderHelper {
     }
 
     private void processSetBluetoothBroadcastAddress(ReceiveData receive) {
-        XLog.i( "processSetBluetoothBroadcastAddress: ");
+        XLog.i("processSetBluetoothBroadcastAddress: ");
     }
 
     private void processGetInterfaceBoardSnNumber(ReceiveData receive) {
@@ -839,6 +923,14 @@ public class ReaderHelper {
                 }
             });
         }
+    }
+
+    public ReaderBase getReaderBase() throws Exception {
+        if (readerBase == null) {
+            throw new NullPointerException("mReader is Null!");
+        }
+
+        return readerBase;
     }
 }
 

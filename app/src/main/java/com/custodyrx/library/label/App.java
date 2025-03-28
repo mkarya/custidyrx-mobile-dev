@@ -45,6 +45,12 @@ public class App extends MultiDexApplication {
         }
         boolean saveLog = Hawk.get(Key.SAVE_INVENTORY_LOG, false);
         XLog.init(this, showLog, saveLog);
+        try {
+            ReaderHelper.setContext(getApplicationContext());
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
         BeeperHelper.init(this);
         ErrorReport.init();

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,8 +34,10 @@ import com.custodyrx.app.src.ui.screens.Activities.Comments.RequestModel.Items;
 import com.custodyrx.app.src.ui.screens.Activities.PerformInventory.models.ResponseModel.AllProduct;
 import com.custodyrx.app.src.ui.screens.Activities.SelectResultActivity;
 import com.custodyrx.app.src.ui.screens.Activities.TagList.Pages.TagListActivity;
+import com.custodyrx.library.label.App;
 import com.custodyrx.library.label.GlobalCfg;
 import com.custodyrx.library.label.adapter.ReaderPowerAdapter;
+import com.custodyrx.library.label.base.Command;
 import com.custodyrx.library.label.base.ReaderBase;
 import com.custodyrx.library.label.bean.InventoryParam;
 import com.custodyrx.library.label.bean.InventoryTagBean;
@@ -46,6 +49,7 @@ import com.custodyrx.library.label.model.BeeperHelper;
 import com.custodyrx.library.label.model.ReaderHelper;
 
 import com.custodyrx.library.label.model.ScannerSetting;
+import com.custodyrx.library.label.model.TDCodeTagBuffer;
 import com.custodyrx.library.label.ui.AfterTextWatcher;
 import com.custodyrx.library.label.ui.home.inventory.ItemSpacingDecoration;
 import com.custodyrx.library.label.ui.home.inventory.PerformInventoryTagAdapter;
@@ -196,6 +200,20 @@ public class PerformInventoryActivity extends BaseActivity {
     private ReaderPowerAdapter readerPowerAdapter;
 
     LoaderDialog loaderDialog;
+
+    private static TDCodeTagBuffer m_curOperateBinDCodeTagbuffer;
+    private LocalBroadcastManager lbm;
+
+
+    private final BroadcastReceiver mRecv = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            refreshBarcodeTagList();
+
+        }
+    };
+    private List<TDCodeTagBuffer.BinDCodeTagMap> tagListData;
 
 
     private Consumer<OutputPower> mOnGetPowerSuccess = new Consumer<OutputPower>() {
@@ -417,10 +435,13 @@ public class PerformInventoryActivity extends BaseActivity {
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (btstartStop.isSelected()) {
-                    startStop(false);
-                }
 
+
+                if (storageHelper.getTagScanMethode().equalsIgnoreCase("RFID")) {
+                    if (btstartStop.isSelected()) {
+                        startStop(false);
+                    }
+                }
                 onBackPressed();
             }
         });
@@ -428,17 +449,41 @@ public class PerformInventoryActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        if (storageHelper.getTagScanMethode().equalsIgnoreCase("Barcode")) {
+            ModuleManager.newInstance().setScanStatus(false);
+            ((App) getApplication()).onTerminate();
+        }
+
+        super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        if (storageHelper.getTagScanMethode().equalsIgnoreCase("Barcode")) {
+            if (mReaderBase != null) {
+                if (!mReaderBase.IsAlive())
+                    mReaderBase.StartWait();
+            }
+        }
+
+        super.onResume();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mReaderBase != null)
-            mReaderBase.signOut();
+        if (storageHelper.getTagScanMethode().equalsIgnoreCase("Barcode")) {
+            if (mReaderBase != null)
+                mReaderBase.signOut();
 
-        if (mSerialPort != null)
-            mSerialPort.close();
+            if (mSerialPort != null)
+                mSerialPort.close();
 
-        mSerialPort = null;
+            mSerialPort = null;
+        }
+
     }
 
     @Override
@@ -481,8 +526,15 @@ public class PerformInventoryActivity extends BaseActivity {
 
 // Delay UI operations to prevent blocking onCreate()
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            //toRFIDConnect();
-            tobarcodeConnect();
+
+            if (storageHelper.getTagScanMethode().equalsIgnoreCase("RFID")) {
+                toRFIDConnect();
+            } else if (storageHelper.getTagScanMethode().equalsIgnoreCase("Barcode")) {
+                tobarcodeConnect();
+            } else {
+                //TODO Both connection RFID / Barcode
+            }
+
         }, 500);
 
     }
@@ -543,6 +595,102 @@ public class PerformInventoryActivity extends BaseActivity {
         performMatchedInventoryTagAdapter.setOnItemChildClickListener(onItemClickListener);
 
 
+    }
+
+    private void setMatchedBarcodeInventory(){
+        rvMatchInventory.setVisibility(View.VISIBLE);
+        newAllProduct = new ArrayList<>();
+        unknownMatchCount = 0;
+
+        Set<String> uniqueEPCSet = new HashSet<>();
+        Map<String, AllProduct> productMap = new HashMap<>();
+
+        for (TDCodeTagBuffer.BinDCodeTagMap tag : tagListData) {
+            String epc = tag.mBarCodeValue.replace(" ","");
+            if (!uniqueEPCSet.add(epc)) {
+                continue; // Skip duplicate EPC
+            }
+
+            String productGuid = database.getProductGuid(epc);
+            if (productGuid != null) {
+                String productName = database.getProductName(productGuid);
+
+                AllProduct matchedItem = productMap.get(productGuid);
+                Items item = new Items(productGuid, epc, 1);
+                if (matchedItem == null) {
+
+
+                    List<Items> itemsList = new ArrayList<>();
+                    itemsList.add(item);
+
+
+                    matchedItem = new AllProduct();
+                    matchedItem.setName(productName);
+                    matchedItem.setInventoryQuantity(1);
+                    matchedItem.setTotalUnitCount(1);
+                    matchedItem.setGuid(productGuid);
+                    matchedItem.setProductItems(itemsList);
+
+                    productMap.put(productGuid, matchedItem);
+                    if (storageHelper.isBeepEveryTag()) {
+                        toPlayBeep();
+                    }
+                } else {
+                    matchedItem.setInventoryQuantity(matchedItem.getInventoryQuantity() + 1);
+                    matchedItem.setTotalUnitCount(matchedItem.getTotalUnitCount() + 1);
+                    matchedItem.getProductItems().add(new Items(productGuid, epc, 1));
+                }
+            }else {
+                unknownMatchCount++;
+            }
+
+        }
+
+        newAllProduct.addAll(productMap.values());
+
+        if (!storageHelper.isIgnoreUnknownTag() && unknownMatchCount > 0) {
+            AllProduct unknownItem = new AllProduct();
+            unknownItem.setName("Unknown");
+            unknownItem.setGuid(null);
+
+            // Use HashSet to store unique unknown EPCs
+            Set<String> uniqueUnknownEPCs = new HashSet<>();
+            List<Items> unknownItemsList = new ArrayList<>();
+
+            for (TDCodeTagBuffer.BinDCodeTagMap tag : tagListData) {
+                String epc = tag.mBarCodeValue.replace(" ","");
+                if (database.getProductGuid(epc) == null && uniqueUnknownEPCs.add(epc)) {
+                    unknownItemsList.add(new Items(null, epc, 1));
+                }
+            }
+
+            // Set the unique unknown items
+            unknownItem.setProductItems(unknownItemsList);
+            unknownItem.setInventoryQuantity(unknownItemsList.size());
+            unknownItem.setTotalUnitCount(unknownItemsList.size());
+
+            newAllProduct.add(unknownItem);
+        }
+
+
+        totalUnitCount = 0;
+        totalQty = 0;
+
+        for (AllProduct data : newAllProduct) {
+            if (!"Unknown".equals(data.getName())) {
+                totalUnitCount += data.getTotalUnitCount();
+                totalQty += data.getInventoryQuantity();
+            }
+        }
+
+        tv_qty.setText(totalQty + "x");
+        tv_unit_count.setText(String.valueOf(totalUnitCount));
+
+        performMatchedInventoryTagAdapter.setData(newAllProduct);
+        performMatchedInventoryTagAdapter.notifyDataSetChanged();
+
+
+        Log.e(TAG, "Bardcode Data List: " + new Gson().toJson(newAllProduct));
     }
 
 
@@ -799,7 +947,7 @@ public class PerformInventoryActivity extends BaseActivity {
 
     }
 
-    private void tobarcodeConnect(){
+    private void tobarcodeConnect() {
         showConnectionDialog();
         try {
             if (ModuleManager.newInstance().getUHFStatus()) {
@@ -807,11 +955,9 @@ public class PerformInventoryActivity extends BaseActivity {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(PerformInventoryActivity.this,"Please exit UHFDemo first!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(PerformInventoryActivity.this, "Please exit UHFDemo first!", Toast.LENGTH_SHORT).show();
             return;
         }
-
-
 
 
         try {
@@ -823,7 +969,6 @@ public class PerformInventoryActivity extends BaseActivity {
             }
 
 
-
             try {
                 mReaderHelper = ReaderHelper.getDefaultHelper();
                 mReaderHelper.setReader(mSerialPort.getInputStream(), mSerialPort.getOutputStream());
@@ -831,7 +976,7 @@ public class PerformInventoryActivity extends BaseActivity {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                return ;
+                return;
             }
 
             new Thread(new Runnable() {
@@ -843,6 +988,12 @@ public class PerformInventoryActivity extends BaseActivity {
                         Thread.currentThread().sleep(1000);
                         hideConnectionDialog();
                         showSnackBar("Barcode Scanner connected");
+                        m_curOperateBinDCodeTagbuffer = mReaderHelper.getCurOperateTagBinDCodeBuffer();
+                        tagListData = new ArrayList<TDCodeTagBuffer.BinDCodeTagMap>();
+                        lbm = LocalBroadcastManager.getInstance(PerformInventoryActivity.this);
+                        IntentFilter itent = new IntentFilter();
+                        itent.addAction(ReaderHelper.BROADCAST_REFRESH_BAR_CODE);
+                        lbm.registerReceiver(mRecv, itent);
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -871,8 +1022,8 @@ public class PerformInventoryActivity extends BaseActivity {
                     PerformInventoryActivity.this,
                     "Please configurate first.",
                     Toast.LENGTH_SHORT).show();
-        } catch (Exception e){
-            Log.e("where the exception!","is here"+e.getMessage());
+        } catch (Exception e) {
+            Log.e("where the exception!", "is here" + e.getMessage());
             /*catch exception test */
         }
 
@@ -885,20 +1036,21 @@ public class PerformInventoryActivity extends BaseActivity {
             return;
         }
         showConnectionDialog();
-        ModuleManager.newInstance().setUHFStatus(true);
+        com.naz.serial.port.ModuleManager.newInstance().setUHFStatus(true);
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ModuleManager.newInstance().setUHFStatus(false);
+        com.naz.serial.port.ModuleManager.newInstance().setUHFStatus(false);
         handle = new SerialPortHandle("/dev/ttyS4", 115200);
 
         boolean success = mReader.connect(handle);
         String text = success ? "Connection SuccessFully" : "Connection Failed";
 
         if (success) {
-            if (!ModuleManager.newInstance().setUHFStatus(true)) {
+
+            if (!com.naz.serial.port.ModuleManager.newInstance().setUHFStatus(true)) {
 
                 Log.e(TAG, "UHF Status false");
             } else {
@@ -996,6 +1148,13 @@ public class PerformInventoryActivity extends BaseActivity {
         registerReceiver(mScreenReceiver, filter);
     }
 
+    private void refreshBarcodeTagList() {
+        //tagListData.addAll(m_curOperateBinDCodeTagbuffer.getIsTagList());
+        tagListData.addAll(mReaderHelper.getCurOperateTagBinDCodeBuffer().getIsTagList());
+        showSnackBar("Tag List :  : " + new Gson().toJson(tagListData));
+        setMatchedBarcodeInventory();
+    }
+
 
     private void clickListeners() {
         ivMenu.setOnClickListener(new View.OnClickListener() {
@@ -1014,18 +1173,35 @@ public class PerformInventoryActivity extends BaseActivity {
         btstartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCountTag > 0) {
-                    mCountTag = 0;
-                    mCanSaveTemp = false;
-                    clear(mCurrRecvList, mBaseList);
-                    if (mOverMap != null) {
-                        mOverMap.clear();
+
+                if (storageHelper.getTagScanMethode().equalsIgnoreCase("RFID")) {
+                    if (mCountTag > 0) {
+                        mCountTag = 0;
+                        mCanSaveTemp = false;
+                        clear(mCurrRecvList, mBaseList);
+                        if (mOverMap != null) {
+                            mOverMap.clear();
+                        }
                     }
+
+                    if (startStop(!btstartStop.isSelected())) {
+                        setDuration();
+                    }
+                } else if (storageHelper.getTagScanMethode().equalsIgnoreCase("Barcode")) {
+                    m_curOperateBinDCodeTagbuffer.getmRawData().clear();
+                    m_curOperateBinDCodeTagbuffer.clearBuffer();
+                    tagListData.clear();
+                    lbm.sendBroadcast(new Intent(ReaderHelper.BROADCAST_REFRESH_BAR_CODE));
+                    tagListData.addAll(m_curOperateBinDCodeTagbuffer.getIsTagList());
+                    mReaderBase.sendMessage(PerformInventoryActivity.this, Command.DEFAULTE_FACTORY.getBytes());
+
+
+
+
+                } else {
+
                 }
 
-                if (startStop(!btstartStop.isSelected())) {
-                    setDuration();
-                }
             }
         });
 

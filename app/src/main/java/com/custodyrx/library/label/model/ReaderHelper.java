@@ -176,6 +176,8 @@ public class ReaderHelper {
     private static ScannerSetting mScannerSetting = ScannerSetting.newInstance();
     private final TDCodeTagBuffer m_curOperateTagBinDCodeBuffer;
 
+
+
     public static void setContext(Context context) throws Exception {
         mContext = context;
         mLocalBroadcastManager = LocalBroadcastManager.getInstance(mContext);
